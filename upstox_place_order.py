@@ -13,12 +13,11 @@ class Upstox_Place_Order():
 
     #Initialise variables
     def __init__(self):
-        self.client_id = 'ebc2b3f9-3b85-45fc-a691-79191b02697c'
-        self.api_secret = 'zfi3xdy2b8'
+        self.client_id = 'paste your api_key here'
+        self.api_secret = 'place your api_secret here'
         self.redirect_uri = 'https://api.upstox.com/v2/login'
         self.code = None
         self.access_token = None
-        self.nifty_symbol = 'NSE_INDEX|NIFTY_50'
         self.auth_url = None
         self.generate_auth_url()
         self.get_auth_code()
@@ -32,7 +31,7 @@ class Upstox_Place_Order():
         print(f"Login URL: {self.auth_url}")
     
 
-    #Log into Upstox and get Auth Code and get Auth Token
+    #Prompts Upstox Login and gets Auth Code
     def get_auth_code(self):
 
         #Use Selenium to open the browser and log in
@@ -40,12 +39,11 @@ class Upstox_Place_Order():
         driver.get(self.auth_url)
 
         # Wait for the user to log in manually or automate this step
-
         time.sleep(35)
         current_url = driver.current_url
         driver.quit()
 
-        # Extract authorization code from the URL
+        # Extracts authorization code from the URL
         if "code=" in current_url:
             self.code = current_url.split("code=")[1]
             logging.info(f"Authorization code: {self.code}")
@@ -79,7 +77,7 @@ class Upstox_Place_Order():
             raise Exception(f"Error fetching access token: {response.status_code} - {response.text}")
         
 
-    #Place Buy Order
+    #Place Buy/Sell Order
     def place_order(self):
         
         url = 'https://api-hft.upstox.com/v2/order/place'
@@ -96,9 +94,9 @@ class Upstox_Place_Order():
         'validity': 'DAY',
         'price': 0,
         'tag': 'string',
-        'instrument_token': 'NSE_EQ|INE669E01016',
+        'instrument_token': 'NSE_EQ|INE669E01016', #List of Instrument Key is provided in Developer Documentation 
         'order_type': 'MARKET',
-        'transaction_type': 'BUY',
+        'transaction_type': 'BUY', #Change to SELL for sell order
         'disclosed_quantity': 0,
         'trigger_price': 0,
         'is_amo': False,    #after market order
