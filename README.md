@@ -9,3 +9,7 @@ Make sure ChromeDriver is installed
 2) Goto Apps in Profile
 3) Create new App
    
+
+
+# Future Work
+1) Function for Option Strategy Basket Call (Place Multiple Buy/Sell Calls using a singulare function)
