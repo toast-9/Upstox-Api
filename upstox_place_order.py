@@ -15,7 +15,7 @@ class Upstox_Place_Order():
     def __init__(self):
         self.client_id = 'paste your api_key here'
         self.api_secret = 'place your api_secret here'
-        self.redirect_uri = 'https://api.upstox.com/v2/login'
+        self.redirect_uri = 'place redirect url here'
         self.code = None
         self.access_token = None
         self.auth_url = None
